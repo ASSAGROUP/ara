@@ -18,7 +18,22 @@ If however you are building custom images which consist of a lot of independent 
 - consider this alpha-level software
 
 ### Requirements
-Install and run [buildkit](https://github.com/moby/buildkit/releases) - currently 0.9.3 - in the background.
+1. Install [go 1.17.5](https://go.dev/doc/install) programming language
+
+```bash
+sudo wget https://go.dev/dl/go1.17.5.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf ~/go1.17.5.linux-amd64.tar.gz
+sudo sh -c 'echo "export PATH=$PATH:/usr/local/go/bin" >> /etc/profile'
+```
+
+Now, logout from the terminal session and login again
+
+```bash
+go version
+```
+Hopefully, you would see something like **go version go1.17.5 linux/amd64**
+
+2. Install and run [buildkit](https://github.com/moby/buildkit/releases) - currently 0.9.3 - in the background.
 Pull and run a docker registry.
 
 NOTE: if you are running it in Bhojpur.NET Platform this is done for you! 
@@ -27,6 +42,16 @@ NOTE: if you are running it in Bhojpur.NET Platform this is done for you!
 sudo su -c "cd /usr; curl -L https://github.com/moby/buildkit/releases/download/v0.9.3/buildkit-v0.9.3.linux-amd64.tar.gz | tar xvz"
 docker run -p 5000:5000 --name registry --rm registry:2
 ```
+## Build the Bhojpur Ara suitable for your environment
+
+Firtly, clone this git repository in a preferred work folder, then issue the following command
+
+```bash
+cd ara
+go get
+go build
+```
+If the build was successful, then you should get **ara** executable image in local folder.
 
 ## Getting started
 ```bash

@@ -1,0 +1,47 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Bhojpur Ara example build",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${fileWorkspaceFolder}",
+            "args": [
+                "build",
+                "--addr",
+                "unix:///run/buildkit/buildkitd.sock",
+                "--no-cache",
+                "--context",
+                "example",
+                "localhost:5000/ara",
+                "."
+            ]
+        },
+        {
+            "name": "Bhojpur Ara runner",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${fileWorkspaceFolder}/pkg/test/runner/main.go",
+            "args": [
+                "eyJEZXNjIjoiaXQgc2hvdWxkIGhhdmUgR28gaW4gdmVyc2lvbiAxLjEzIiwiU2tpcCI6ZmFsc2UsIlVzZXIiOiIiLCJDb21tYW5kIjpbImdvIiwidmVyc2lvbiJdLCJFbnRyeXBvaW50IjpudWxsLCJFbnYiOm51bGwsIkFzc2VydGlvbnMiOlsic3Rkb3V0LmluZGV4T2YoXCJnbzEuMTFcIikgIT0gLTEiXX0="
+            ]
+        },
+        {
+            "name": "Launch build integration test",
+            "type": "go",
+            "request": "launch",
+            "mode": "test",
+            "program": "${fileWorkspaceFolder}/pkg/ara/build_test.go",
+            "args": [
+                "-test.run",
+                "TestProjectChunk_test_integration"
+            ],
+            "env": {
+                "BUILDKIT_ADDR": "unix:///run/buildkit/buildkitd.sock",
+                "TARGET_REF": "127.0.0.1:5000",
+            }
+        }
+    ]
+}

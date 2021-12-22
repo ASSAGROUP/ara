@@ -1,5 +1,5 @@
 # Bhojpur Ara - Automated Resource Assembly
-The Bhojpur Ara is a software-as-a-service product used for automated resource assembly within the Bhojpur.NET Platform ecosystem. It assembles platform aware custom applications and/or services. It is a rather experimental Docker/OCI image builder. Its goal is to build independent layers where a change to one layer does *not* invalidate the ones sitting "above" it. 
+The Bhojpur Ara is a service product used for automated resource assembly within the Bhojpur.NET Platform ecosystem. It assembles platform aware custom applications and/or services. It is a rather experimental Docker/OCI image builder. Its goal is to build independent layers where a change to one layer does *not* invalidate the ones sitting "above" it. 
 
 ## How does it work?
 The Bhojpur Ara software has three main capabilities.

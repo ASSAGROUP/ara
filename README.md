@@ -18,13 +18,13 @@ If however you are building custom images which consist of a lot of independent 
 - consider this alpha-level software
 
 ### Requirements
-Install and run [buildkit](https://github.com/moby/buildkit/releases) - currently 0.8.3 - in the background.
+Install and run [buildkit](https://github.com/moby/buildkit/releases) - currently 0.9.3 - in the background.
 Pull and run a docker registry.
 
 NOTE: if you are running it in Bhojpur.NET Platform this is done for you! 
 
 ```bash
-sudo su -c "cd /usr; curl -L https://github.com/moby/buildkit/releases/download/v0.8.3/buildkit-v0.8.3.linux-amd64.tar.gz | tar xvz"
+sudo su -c "cd /usr; curl -L https://github.com/moby/buildkit/releases/download/v0.9.3/buildkit-v0.9.3.linux-amd64.tar.gz | tar xvz"
 docker run -p 5000:5000 --name registry --rm registry:2
 ```
 

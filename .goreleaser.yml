@@ -1,0 +1,59 @@
+before:
+  hooks:
+    - go generate -v ./...
+builds:
+- id: ara
+  env:
+  - CGO_ENABLED=0
+  ldflags:
+  - -s -w -X github.com/bhojpur/ara/cmd/core.version={{.Version}}-{{.ShortCommit}}
+- id: ara-util
+  env:
+  - CGO_ENABLED=0
+  main: main-util.go
+  binary: ara-util
+  flags:
+    - -tags=util
+  ldflags:
+  - -s -w -X github.com/bhojpur/ara/cmd/util.version={{.Version}}-{{.ShortCommit}}
+archives:
+- id: ara
+  replacements:
+    darwin: Darwin
+    linux: Linux
+    386: i386
+    amd64: x86_64
+  builds:
+  - ara
+- id: ara-util
+  files:
+  - "none*"
+  format: binary
+  builds:
+  - ara-util
+  replacements:
+    darwin: Darwin
+    linux: Linux
+    386: i386
+    amd64: x86_64
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Tag }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+    - '^docs:'
+    - '^test:'
+release:
+  prerelease: auto
+dockers:
+  - goos: linux
+    goarch: amd64
+    goarm: ''
+    dockerfile: Dockerfile
+    image_templates:
+    - "ghcr.io/bhojpur/ara:{{ .Tag }}"
+    extra_files:
+    - README.md

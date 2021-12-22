@@ -1,0 +1,6 @@
+- desc: "it should say Nirbhaya Dihra"
+  command: ["echo", "Nirbhaya Dihra"]
+  assert:
+  - status == 0
+  - stdout.indexOf("Nirbhaya Dihra") != -1
+  - stderr.length == 0

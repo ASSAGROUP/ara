@@ -29,14 +29,14 @@ import (
 	"os"
 	"sort"
 
+	"github.com/bhojpur/ara/pkg/test"
+	"github.com/bhojpur/ara/pkg/test/buildkit"
 	"github.com/containerd/console"
 	"github.com/containerd/containerd/errdefs"
 	clog "github.com/containerd/containerd/log"
 	"github.com/containerd/containerd/remotes"
 	"github.com/containerd/containerd/remotes/docker"
 	"github.com/docker/distribution/reference"
-	"github.com/bhojpur/ara/pkg/test"
-	"github.com/bhojpur/ara/pkg/test/buildkit"
 	"github.com/mattn/go-isatty"
 	"github.com/moby/buildkit/client"
 	"github.com/moby/buildkit/session"
@@ -70,7 +70,7 @@ type buildOpts struct {
 // BuildOpt modifies build behaviour
 type BuildOpt func(*buildOpts) error
 
-// WithCacheRef makes Ara use a cache ref other than the target ref
+// WithCacheRef makes Bhojpur Ara use a cache ref other than the target ref
 func WithCacheRef(ref string) BuildOpt {
 	return func(b *buildOpts) error {
 		r, err := reference.ParseNamed(ref)
@@ -170,7 +170,7 @@ func (p *Project) Build(ctx context.Context, session *BuildSession) error {
 	for _, chk := range p.Chunks {
 		_, _, err := chk.test(ctx, session)
 		if err != nil {
-			return fmt.Errorf("cannot build chunk %s: %w", chk.Name, err)
+			return fmt.Errorf("cannot test chunk %s: %w", chk.Name, err)
 		}
 
 		_, _, err = chk.build(ctx, session)

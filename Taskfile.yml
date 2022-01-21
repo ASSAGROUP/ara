@@ -13,7 +13,7 @@ tasks:
         desc: Build the web application
         cmds:
         - GOFLAGS=-mod=mod go build -o bin/ara-util main-util.go 
-        - GOFLAGS=-mod=mod go build -o bin/ara ara.go 
+        - GOFLAGS=-mod=mod go build -o bin/ara main.go 
 
     build-desktop:
         desc: Build the desktop application for current OS

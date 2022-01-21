@@ -1,3 +1,5 @@
+package core
+
 // Copyright (c) 2018 Bhojpur Consulting Private Limited, India. All rights reserved.
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -18,15 +20,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package core
-
 import (
 	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 
-	"github.com/bhojpur/ara/pkg/ara"
+	ara "github.com/bhojpur/ara/pkg/engine"
 	"github.com/spf13/cobra"
 )
 

@@ -1,3 +1,5 @@
+package util
+
 // Copyright (c) 2018 Bhojpur Consulting Private Limited, India. All rights reserved.
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -18,8 +20,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package util
-
 import (
 	"context"
 	"encoding/xml"
@@ -31,7 +31,7 @@ import (
 	"gopkg.in/yaml.v2"
 
 	"github.com/bhojpur/ara/pkg/fancylog"
-	"github.com/bhojpur/ara/pkg/test"
+	testsuites "github.com/bhojpur/ara/pkg/test"
 )
 
 var testRunCmd = &cobra.Command{
@@ -42,7 +42,7 @@ var testRunCmd = &cobra.Command{
 		log.SetFormatter(&fancylog.Formatter{})
 
 		testFiles := args
-		var tests []*test.Spec
+		var tests []*testsuites.Spec
 
 		for _, fn := range testFiles {
 			fc, err := ioutil.ReadFile(fn)
@@ -50,7 +50,7 @@ var testRunCmd = &cobra.Command{
 				log.Fatal(err)
 			}
 
-			var t []*test.Spec
+			var t []*testsuites.Spec
 			err = yaml.Unmarshal(fc, &t)
 			if err != nil {
 				log.WithField("file", fn).Fatal(err)
@@ -59,7 +59,7 @@ var testRunCmd = &cobra.Command{
 			tests = append(tests, t...)
 		}
 
-		results, success := test.RunTests(context.Background(), test.LocalExecutor{}, tests)
+		results, success := testsuites.RunTests(context.Background(), testsuites.LocalExecutor{}, tests)
 
 		xmlout, _ := cmd.Flags().GetString("output-test-xml")
 		if xmlout != "" {

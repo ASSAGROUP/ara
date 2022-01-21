@@ -1,3 +1,5 @@
+package core
+
 // Copyright (c) 2018 Bhojpur Consulting Private Limited, India. All rights reserved.
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -18,16 +20,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package core
-
 import (
 	"fmt"
 	"os"
 
+	"github.com/bhojpur/ara/pkg/fancylog"
 	"github.com/containerd/containerd/remotes"
 	"github.com/containerd/containerd/remotes/docker"
 	"github.com/docker/cli/cli/config"
-	"github.com/bhojpur/ara/pkg/fancylog"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )

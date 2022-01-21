@@ -1,3 +1,5 @@
+package util
+
 // Copyright (c) 2018 Bhojpur Consulting Private Limited, India. All rights reserved.
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -18,8 +20,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package util
-
 import (
 	"context"
 	"encoding/csv"
@@ -36,7 +36,7 @@ import (
 	"gopkg.in/yaml.v2"
 
 	"github.com/bhojpur/ara/pkg/fancylog"
-	"github.com/bhojpur/ara/pkg/test"
+	testsuites "github.com/bhojpur/ara/pkg/test"
 )
 
 var testAddCmd = &cobra.Command{
@@ -52,7 +52,7 @@ var testAddCmd = &cobra.Command{
 			log.Fatal(err)
 		}
 
-		var tests []*test.Spec
+		var tests []*testsuites.Spec
 		err = yaml.Unmarshal(fc, &tests)
 		if err != nil {
 			log.Fatal(err)
@@ -103,7 +103,7 @@ var testAddCmd = &cobra.Command{
 			}
 		}
 
-		spec := &test.Spec{
+		spec := &testsuites.Spec{
 			Desc:       desc,
 			Command:    commandsegs,
 			User:       user,
@@ -111,7 +111,7 @@ var testAddCmd = &cobra.Command{
 			Entrypoint: epsegs,
 			Skip:       false,
 		}
-		executor := test.LocalExecutor{}
+		executor := testsuites.LocalExecutor{}
 		tr, err := executor.Run(context.TODO(), spec)
 		if err != nil {
 			log.Fatal(err)
@@ -159,7 +159,7 @@ func splitCommand(cmd string) ([]string, error) {
 	return r.Read()
 }
 
-func addAssertions(spec *test.Spec, runres *test.RunResult) error {
+func addAssertions(spec *testsuites.Spec, runres *testsuites.RunResult) error {
 	// don't let log messages interfere with prompt
 	log.SetLevel(log.WarnLevel)
 
@@ -178,8 +178,8 @@ func addAssertions(spec *test.Spec, runres *test.RunResult) error {
 			Label:     "Assertion",
 			AllowEdit: true,
 			Validate: func(a string) error {
-				var res test.Result
-				err := test.ValidateAssertions(&res, []string{a}, runres)
+				var res testsuites.Result
+				err := testsuites.ValidateAssertions(&res, []string{a}, runres)
 				if err != nil {
 					return err
 				}

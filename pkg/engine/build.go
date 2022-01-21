@@ -1,3 +1,5 @@
+package engine
+
 // Copyright (c) 2018 Bhojpur Consulting Private Limited, India. All rights reserved.
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -18,8 +20,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package ara
-
 import (
 	"context"
 	"encoding/json"
@@ -29,7 +29,7 @@ import (
 	"os"
 	"sort"
 
-	"github.com/bhojpur/ara/pkg/test"
+	testsuites "github.com/bhojpur/ara/pkg/test"
 	"github.com/bhojpur/ara/pkg/test/buildkit"
 	"github.com/containerd/console"
 	"github.com/containerd/containerd/errdefs"
@@ -580,7 +580,7 @@ func (p *ProjectChunk) test(ctx context.Context, sess *BuildSession) (ok bool, d
 
 	log.WithField("chunk", p.Name).Warn("running tests")
 	executor := buildkit.NewExecutor(sess.Client, testRef.String(), imgcfg)
-	_, ok = test.RunTests(ctx, executor, p.Tests)
+	_, ok = testsuites.RunTests(ctx, executor, p.Tests)
 	if !ok {
 		return false, true, fmt.Errorf("%s: tests failed", p.Name)
 	}

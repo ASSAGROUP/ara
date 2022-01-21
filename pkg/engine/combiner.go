@@ -1,3 +1,5 @@
+package engine
+
 // Copyright (c) 2018 Bhojpur Consulting Private Limited, India. All rights reserved.
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -18,8 +20,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package ara
-
 import (
 	"context"
 	"encoding/json"
@@ -27,7 +27,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/bhojpur/ara/pkg/test"
+	testsuites "github.com/bhojpur/ara/pkg/test"
 	"github.com/bhojpur/ara/pkg/test/buildkit"
 	"github.com/docker/distribution/reference"
 	"github.com/moby/buildkit/client"
@@ -233,7 +233,7 @@ func (p *Project) Combine(ctx context.Context, chunks []string, dest reference.N
 			}
 
 			executor := buildkit.NewExecutor(options.BuildkitClient, dest.String(), &ccfg)
-			_, ok := test.RunTests(ctx, executor, chk.Tests)
+			_, ok := testsuites.RunTests(ctx, executor, chk.Tests)
 			if !ok {
 				return fmt.Errorf("tests failed")
 			}

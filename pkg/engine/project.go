@@ -1,3 +1,5 @@
+package engine
+
 // Copyright (c) 2018 Bhojpur Consulting Private Limited, India. All rights reserved.
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -18,8 +20,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package ara
-
 import (
 	"encoding/hex"
 	"fmt"
@@ -30,9 +30,9 @@ import (
 	"sort"
 	"strings"
 
+	testsuites "github.com/bhojpur/ara/pkg/test"
 	"github.com/bmatcuk/doublestar"
 	"github.com/docker/distribution/reference"
-	"github.com/bhojpur/ara/pkg/test"
 	"github.com/minio/highwayhash"
 	ignore "github.com/sabhiram/go-gitignore"
 	"gopkg.in/yaml.v2"
@@ -122,7 +122,7 @@ type ProjectChunk struct {
 	Name        string
 	Dockerfile  []byte
 	ContextPath string
-	Tests       []*test.Spec
+	Tests       []*testsuites.Spec
 	Args        map[string]string
 
 	cachedHash struct {

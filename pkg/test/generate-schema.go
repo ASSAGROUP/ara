@@ -29,11 +29,11 @@ import (
 	"log"
 
 	"github.com/alecthomas/jsonschema"
-	"github.com/bhojpur/ara/pkg/test"
+	testsuites "github.com/bhojpur/ara/pkg/test"
 )
 
 func main() {
-	var root []test.Spec
+	var root []testsuites.Spec
 	schema := jsonschema.Reflect(&root)
 
 	fc, err := json.MarshalIndent(schema, "", "  ")

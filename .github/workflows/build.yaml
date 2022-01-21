@@ -84,7 +84,7 @@ jobs:
         run: |
           go mod download
       - name: Build the test runner
-        run: pushd pkg/test/runner; sudo chmod 764 ./build.sh; sudo mkdir bin; ./build.sh; popd
+        run: pushd pkg/test/runner; sudo chmod 764 ./build.sh; sudo mkdir bin; sudo chmod 764 bin; ./build.sh; popd
       - name: Install the latest buildkit release
         run: |
           BUILDKIT_URL="$(curl -sL https://api.github.com/repos/moby/buildkit/releases \

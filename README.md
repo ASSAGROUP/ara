@@ -86,10 +86,10 @@ echo "COPY message.txt /" >> chunks/anotherchunk/Dockerfile
 ara project add-combination full helloworld anotherchunk
 
 # build the chunks
-ara build ap.gcr.io/some-project/ara-test
+ara build us-west2-docker.pkg.dev/some-project/ara-test
 
 # build all combinations
-ara combine ap.gcr.io/some-project/ara-test --all
+ara combine us-west2-docker.pkg.dev/some-project/ara-test --all
 ```
 
 # Usage

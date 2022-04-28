@@ -21,13 +21,11 @@ builds:
   - -X "github.com/bhojpur/ara/pkg/version.BuildCommit={{ .FullCommit }}"
   goos:
     - linux
-    - darwin
   goarch:
     - amd64
+    - arm
+    - arm64
     - 386
-  ignore:
-    - goos: linux
-      goarch: 386
 - id: arautl
   env:
   - CGO_ENABLED=0
@@ -42,13 +40,11 @@ builds:
   - -X "github.com/bhojpur/ara/pkg/version.BuildCommit={{ .FullCommit }}"
   goos:
     - linux
-    - darwin
   goarch:
     - amd64
+    - arm
+    - arm64
     - 386
-  ignore:
-    - goos: linux
-      goarch: 386
 archives:
 - id: ara
   files:

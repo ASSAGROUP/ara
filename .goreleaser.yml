@@ -35,6 +35,8 @@ archives:
 - id: ara
   files:
   - "none*"
+  format: binary # this removes the tar of the archives, leaving the binaries alone
+  name_template: ara-{{ .Tag }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}
   replacements:
     darwin: Darwin
     linux: Linux
@@ -45,7 +47,8 @@ archives:
 - id: arautl
   files:
   - "none*"
-  format: binary
+  format: binary # this removes the tar of the archives, leaving the binaries alone
+  name_template: arautl-{{ .Tag }}-{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}
   builds:
   - arautl
   replacements:

@@ -19,12 +19,6 @@ builds:
   - -X "github.com/bhojpur/ara/pkg/version.Version={{.Version}}-{{.ShortCommit}}
   - -X "github.com/bhojpur/ara/pkg/version.BuildTime={{ time "2006-01-02 15:04:05 MST" }}"
   - -X "github.com/bhojpur/ara/pkg/version.BuildCommit={{ .FullCommit }}"
-  goos:
-    - linux
-    - darwin
-  goarch:
-    - amd64
-    - 386
 - id: arautl
   env:
   - CGO_ENABLED=0
@@ -37,12 +31,6 @@ builds:
   - -X "github.com/bhojpur/ara/pkg/version.Version={{.Version}}-{{.ShortCommit}}
   - -X "github.com/bhojpur/ara/pkg/version.BuildTime={{ time "2006-01-02 15:04:05 MST" }}"
   - -X "github.com/bhojpur/ara/pkg/version.BuildCommit={{ .FullCommit }}"
-  goos:
-    - linux
-    - darwin
-  goarch:
-    - amd64
-    - 386
 archives:
 - id: ara
   files:

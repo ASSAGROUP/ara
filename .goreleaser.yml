@@ -21,10 +21,9 @@ builds:
   - -X "github.com/bhojpur/ara/pkg/version.BuildCommit={{ .FullCommit }}"
   goos:
     - linux
+    - darwin
   goarch:
     - amd64
-    - arm
-    - arm64
     - 386
 - id: arautl
   env:
@@ -40,10 +39,9 @@ builds:
   - -X "github.com/bhojpur/ara/pkg/version.BuildCommit={{ .FullCommit }}"
   goos:
     - linux
+    - darwin
   goarch:
     - amd64
-    - arm
-    - arm64
     - 386
 archives:
 - id: ara

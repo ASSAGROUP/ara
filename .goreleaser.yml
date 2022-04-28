@@ -16,7 +16,7 @@ builds:
   binary: ara
   ldflags:
   - -s -w
-  - -X "github.com/bhojpur/ara/pkg/version.Version={{.Version}}-{{.ShortCommit}}
+  - -X "github.com/bhojpur/ara/pkg/version.Version={{.Version}}-{{.ShortCommit}}"
   - -X "github.com/bhojpur/ara/pkg/version.BuildTime={{ time "2006-01-02 15:04:05 MST" }}"
   - -X "github.com/bhojpur/ara/pkg/version.BuildCommit={{ .FullCommit }}"
 - id: arautl
@@ -28,7 +28,7 @@ builds:
     - -tags=util
   ldflags:
   - -s -w
-  - -X "github.com/bhojpur/ara/pkg/version.Version={{.Version}}-{{.ShortCommit}}
+  - -X "github.com/bhojpur/ara/pkg/version.Version={{.Version}}-{{.ShortCommit}}"
   - -X "github.com/bhojpur/ara/pkg/version.BuildTime={{ time "2006-01-02 15:04:05 MST" }}"
   - -X "github.com/bhojpur/ara/pkg/version.BuildCommit={{ .FullCommit }}"
 archives:

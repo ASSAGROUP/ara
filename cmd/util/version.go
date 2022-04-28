@@ -23,17 +23,16 @@ package util
 import (
 	"fmt"
 
+	stamp "github.com/bhojpur/ara/pkg/version"
 	"github.com/spf13/cobra"
 )
-
-var version = "unknown"
 
 // versionCmd represents the version command
 var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Prints the Bhojpur Ara software version",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(version)
+		fmt.Println("arautl " + stamp.FullVersion())
 	},
 }
 

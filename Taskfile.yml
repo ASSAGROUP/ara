@@ -1,7 +1,7 @@
 version: "3"
 
 vars:
-  GREETING: Hello, Ara Developer!
+  GREETING: Hello, Bhojpur Ara Developer!
 
 tasks:
     default:
@@ -9,43 +9,47 @@ tasks:
         - echo "{{.GREETING}}"
         silent: true
 
-    build-web:
-        desc: Build the web application
+    build-tools:
+        desc: Build the a collection of software tools
         cmds:
-        - GOFLAGS=-mod=mod go build -o bin/ara-util main-util.go 
         - GOFLAGS=-mod=mod go build -o bin/ara main.go 
+        - chmod 755 bin/ara
+        - cp bin/ara $GOPATH/bin
+        - GOFLAGS=-mod=mod go build -o bin/arautl main-util.go 
+        - chmod 755 bin/arautl
+        - cp bin/arautl $GOPATH/bin
 
     build-desktop:
         desc: Build the desktop application for current OS
         cmds:
-        - fyne package -os macos -icon ara.png
-        - fyne package -os linux -icon ara.png
-        - fyne package -os windows -icon ara.png
+        - guiutl package -name "Bhojpur Ara" -os macos -icon ara.png
+        - guiutl package -name "Bhojpur Ara" -os linux -icon ara.png
+        - guiutl package -name "Bhojpur Ara" -os windows -icon ara.png
 
     package-android:
         desc: Package the mobile application for Android
         cmds:
-        - fyne package -os android -appID net.bhojpur.ara -icon ara.png
+        - guiutl package -name "Bhojpur Ara" -os android -appID net.bhojpur.ara -icon ara.png
 
     package-ios:
         desc: Package the mobile application for iOS
         cmds:
-        - fyne package -os ios -appID net.bhojpur.ara -icon ara.png
+        - guiutl package -name "Bhojpur Ara" -os ios -appID net.bhojpur.ara -icon ara.png
 
     release-macos:
         desc: Release the native application for macOS App Store
         cmds:
-        - fyne release -appID net.bhojpur.ara -appVersion 1.0 -appBuild 1 -category business
+        - guiutl release -appID net.bhojpur.ara -appVersion 1.0 -appBuild 1 -category business
 
     release-android:
         desc: Release the mobile application for Google Play
         cmds:
-        - fyne release -os android -appID net.bhojpur.ara -appVersion 1.0 -appBuild 1
+        - guiutl release -os android -appID net.bhojpur.ara -appVersion 1.0 -appBuild 1
 
     release-ios:
         desc: Release the mobile application for iOS App Store
         cmds:
-        - fyne release -os ios -appID net.bhojpur.ara -appVersion 1.0 -appBuild 1
+        - guiutl release -os ios -appID net.bhojpur.ara -appVersion 1.0 -appBuild 1
 
     run-web-server:
         desc: Run the web server application from source code
@@ -68,10 +72,9 @@ tasks:
         - GOFLAGS=-mod=mod go run native/main.go
 
     generate:
-        desc: Generate Go source code from Protool Buffers
+        desc: Generate Go source code
         cmds:
-        - protoc --go_out=plugins=grpc:. --go_opt=paths=source_relative pkg/api/v1/ara.proto
-        - protoc --go_out=plugins=grpc:. --go_opt=paths=source_relative pkg/api/v1/ara-ui.proto
+        - GOFLAGS=-mod=mod go generate ./...
 
     test:
         desc: Execute all the Unit Tests

@@ -30,8 +30,8 @@ import (
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "ara-util",
-	Short: "ara-util is random collection of utilities that make working Bhojpur Ara easier",
+	Use:   "arautl",
+	Short: "Bhojpur Ara utility is a random collection of tools that make working with `ara` easier",
 	Args:  cobra.ExactArgs(1),
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 		logrus.SetLevel(logrus.DebugLevel)

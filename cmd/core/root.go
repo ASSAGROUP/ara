@@ -43,8 +43,7 @@ var rootCmd = &cobra.Command{
 	Use:   "ara",
 	Short: "Bhojpur Ara is an experimental Docker image builder with independent layers",
 	Long: `Bhojpur Ara breaks your usual Docker build by separating the layers. The idea is that
-this way we can avoid needless cache invalidation.
-THIS IS AN EXPERIEMENT. THINGS WILL BREAK. BEWARE.`,
+this way we can avoid needless cache invalidation.`,
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 		formatter := &fancylog.Formatter{}
 		log.SetFormatter(formatter)

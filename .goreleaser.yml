@@ -1,23 +1,37 @@
 before:
   hooks:
     - go generate -v ./...
+dist: release
+source:
+  enabled: true
+  name_template: '{{ .ProjectName }}-{{ .Tag }}-source'
+checksum:
+  name_template: '{{ .ProjectName }}-{{ .Tag }}-checksums.txt'
 builds:
 - id: ara
   env:
   - CGO_ENABLED=0
   ldflags:
-  - -s -w -X github.com/bhojpur/ara/cmd/core.version={{.Version}}-{{.ShortCommit}}
-- id: ara-util
+  - -s -w
+  - -X "github.com/bhojpur/ara/pkg/version.Version={{.Version}}-{{.ShortCommit}}
+  - -X "github.com/bhojpur/ara/pkg/version.BuildTime={{ time "2006-01-02 15:04:05 MST" }}"
+  - -X "github.com/bhojpur/ara/pkg/version.BuildCommit={{ .FullCommit }}"
+- id: arautl
   env:
   - CGO_ENABLED=0
   main: main-util.go
-  binary: ara-util
+  binary: arautl
   flags:
     - -tags=util
   ldflags:
-  - -s -w -X github.com/bhojpur/ara/cmd/util.version={{.Version}}-{{.ShortCommit}}
+  - -s -w
+  - -X "github.com/bhojpur/ara/pkg/version.Version={{.Version}}-{{.ShortCommit}}
+  - -X "github.com/bhojpur/ara/pkg/version.BuildTime={{ time "2006-01-02 15:04:05 MST" }}"
+  - -X "github.com/bhojpur/ara/pkg/version.BuildCommit={{ .FullCommit }}"
 archives:
 - id: ara
+  files:
+  - "none*"
   replacements:
     darwin: Darwin
     linux: Linux
@@ -25,19 +39,17 @@ archives:
     amd64: x86_64
   builds:
   - ara
-- id: ara-util
+- id: arautl
   files:
   - "none*"
   format: binary
   builds:
-  - ara-util
+  - arautl
   replacements:
     darwin: Darwin
     linux: Linux
     386: i386
     amd64: x86_64
-checksum:
-  name_template: 'checksums.txt'
 snapshot:
   name_template: "{{ .Tag }}-next"
 changelog:
@@ -48,6 +60,9 @@ changelog:
     - '^test:'
 release:
   prerelease: auto
+  header: |
+    Bhojpur Ara breaks your usual Docker build by separating the layers. The idea is that
+    this way we can avoid needless cache invalidation.
 dockers:
   - goos: linux
     goarch: amd64

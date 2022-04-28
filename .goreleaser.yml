@@ -29,6 +29,8 @@ builds:
   ignore:
     - goos: linux
       goarch: 386
+      goarch: arm
+      goarm: 7
 - id: arautl
   env:
   - CGO_ENABLED=0
@@ -52,6 +54,8 @@ builds:
   ignore:
     - goos: linux
       goarch: 386
+      goarch: arm
+      goarm: 7
 archives:
 - id: ara
   files:
